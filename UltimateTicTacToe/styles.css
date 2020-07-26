@@ -1,0 +1,234 @@
+*, *::after, *::before {
+	box-sizing: border-box;
+}
+
+/* Variables */
+
+:root {
+	--big-square-size: 220px;
+	--small-square-size: 71px;
+	--font-size: 73px;
+}
+
+body {
+	margin: 0;
+	background-image: url('bg.jpg');
+}
+
+h1 {
+	color: white;
+	font-size: calc(var(--font-size) * .28)
+}
+
+a {
+	height: 0px;
+	weight: 0px;
+	margin-top: -20px;
+	text-decoration: none;
+}
+
+.titleCard {
+	text-align:center;
+	font-size: var(--font-size);
+	margin-bottom: 10px;
+	color: hotpink;
+	background-color: black;
+}
+
+/* Board and cells*/
+
+.macroBoard {
+	display:grid;
+	justify-content: center;	
+	align-content: center;
+	grid-template-columns: repeat(3,auto);
+}
+
+
+
+.microBoard {
+	width:var(--big-square-size);
+	height:var(--big-square-size);
+	background-color: black;
+	border: 5px solid white;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	grid-template-columns: repeat(3,auto);
+}
+
+
+.microBoard.x::before {
+	content: "";
+	display: block;
+	width: calc(var(--big-square-size));
+	height: calc((var(--big-square-size)/3));
+	position: absolute;
+	background-color: hotpink;
+	border-radius: 50px;
+	transform: rotate(45deg);
+}
+
+.microBoard.x::after{
+	content: "";
+	display: block;
+	width: calc(var(--big-square-size));
+	height: calc((var(--big-square-size)/3));
+	position: absolute;
+	background-color: hotpink;
+	border-radius: 50px;
+	transform: rotate(-45deg);
+}
+
+
+.microBoard.o::before{
+	content: "";
+	display: block;
+	width: calc(var(--big-square-size) * .9);
+	height: calc(var(--big-square-size) * .9);
+	position: absolute;
+	background-color: hotpink;
+	border-radius: 50%;
+}
+
+.microBoard.o::after{
+	content: "";
+	display: block;
+	width: calc(var(--big-square-size) * .5);
+	height: calc(var(--big-square-size) * .5);
+	position: absolute;
+	background-color: black;
+	border-radius: 50%;
+}
+
+.microBoard.draw::after{
+	content: "";
+	display: block;
+	width: calc(var(--big-square-size) * .8);
+	height: calc(var(--big-square-size) * .8);
+	position: absolute;
+	background-color: hotpink;
+}
+
+.cell {
+	width:var(--small-square-size);
+	height:var(--small-square-size);
+	background-color: black;
+	border: 1px solid white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.o::before{
+	background-color: hotpink;
+}
+
+.cell.o::after{
+	background-color: black;
+}
+
+.microBoard.xHover .cell:not(.x):not(.o):hover::before,
+.microBoard.xHover .cell:not(.x):not(.o):hover::after{
+	background-color: grey;
+}
+
+.microBoard.oHover .cell:not(.x):not(.o):hover::before{
+	background-color: grey;
+}
+
+.microBoard.oHover .cell:not(.x):not(.o):hover::after{
+	background-color: black;
+}
+
+
+.cell.x::before,
+.cell.x::after,
+.microBoard.xHover .cell:not(.x):not(.o):hover::before,
+.microBoard.xHover .cell:not(.x):not(.o):hover::after{
+	content: "";
+	display: block;
+	width: calc(var(--small-square-size));
+	height: calc((var(--small-square-size)/3));
+	position: absolute;
+	border-radius: 50px;
+}
+
+.cell.x::before,
+.microBoard.xHover .cell:not(.x):not(.o):hover::before{
+	transform: rotate(45deg);
+}
+
+.cell.x::after,
+.microBoard.xHover .cell:not(.x):not(.o):hover::after{
+	transform: rotate(-45deg);
+}
+
+
+.cell.o::before,
+.microBoard.oHover .cell:not(.x):not(.o):hover::before{
+	content: "";
+	display: block;
+	width: calc(var(--small-square-size) * .9);
+	height: calc(var(--small-square-size) * .9);
+	position: absolute;
+	border-radius: 50%;
+}
+
+.cell.o::after,
+.microBoard.oHover .cell:not(.x):not(.o):hover::after{
+	content: "";
+	display: block;
+	width: calc(var(--small-square-size) * .5);
+	height: calc(var(--small-square-size) * .5);
+	position: absolute;
+	border-radius: 50%;
+}
+
+
+/* main menu and restart screens */
+
+.mainMenu,
+.restart {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: white;
+	font-size: var(--font-size);
+	background-color: black;
+	opacity: .90;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.rules{
+	width: 900px;
+	height: 580px;
+	display: block;
+	background-color: black;
+	border: 20px solid black;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+
+.startButton,
+.restartButton{
+	margin-top: 20px;
+}
+
+.backButton {
+	display: block;
+	margin: 0 auto;
+	cursor: pointer
+}
+.mainMenu.show,
+.restart.show {
+	display: flex;
+}
